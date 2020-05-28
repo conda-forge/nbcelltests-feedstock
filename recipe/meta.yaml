@@ -1,5 +1,5 @@
 {% set name = "nbcelltests" %}
-{% set version = "0.1.3" %}
+{% set version = "0.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 904656317adb86faba5cb5640195e79ea5022eab2ab2852a53975b5346f3659d
+  sha256: a61e9805ee9870e30967a0cba594b13dc342413dabc8b7bf3ced35dff834827b
 
 build:
   number: 0
   noarch: python
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
@@ -31,15 +31,24 @@ requirements:
     - flake8
 
 test:
+  requires:
+    - mock
+    - beautifulsoup4
   imports:
-    - nbcelltests 
+    - nbcelltests
+  commands:
+    - python -m pytest --pyargs nbcelltests
+    # verify labextension was installed
+    - jupyter labextension check jupyterlab_celltests
+    # verify serverextension was installed (apparently can't ask serverextension about individual extensions)
+    - python -c "import subprocess,re,sys; import nbcelltests;  ext=subprocess.check_output(['jupyter','serverextension','list'],stderr=subprocess.STDOUT).decode(); res0=re.search('.*nbcelltests.*{}.*ok'.format(nbcelltests.__version__),ext,re.IGNORECASE); res1=re.search('nbcelltests.*enabled', ext); sys.exit(not (res0 and res1))"
 
 about:
   home: http://github.com/jpmorganchase/nbcelltests
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
-  summary: 'Cell-by-cell tests for Jupyter notebooks'
+  summary: Cell-by-cell tests for Jupyter notebooks
 
   description: |
     Cell-by-cell tests for Jupyter notebooks
@@ -49,4 +58,4 @@ extra:
   recipe-maintainers:
     - timkpaine
     - ceball
-    - vidartf 
+    - vidartf
