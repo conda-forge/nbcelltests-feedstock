@@ -29,6 +29,7 @@ requirements:
     - pytest-cov
     - pytest-html >=1.20.0
     - flake8
+    - parameterized
 
 test:
   requires:
@@ -38,11 +39,11 @@ test:
     - nbcelltests
   commands:
     - python -m pytest --pyargs nbcelltests
+    # See nbcelltests' Makefile for the original source of these
     # verify labextension was installed
     - jupyter labextension check jupyterlab_celltests
     # verify serverextension was installed (apparently can't ask serverextension about individual extensions)
-    - python -c "import subprocess,re,sys; import nbcelltests;  ext=subprocess.check_output(['jupyter','serverextension','list'],stderr=subprocess.STDOUT).decode(); res0=re.search('.*nbcelltests.*{}.*ok'.format(nbcelltests.__version__),ext,re.IGNORECASE); res1=re.search('nbcelltests.*enabled', ext); sys.exit(not (res0 and
-      res1))"
+    - python -c "import subprocess,re,sys; import nbcelltests;  ext=subprocess.check_output(['jupyter','serverextension','list'],stderr=subprocess.STDOUT).decode(); res0=re.search('.*nbcelltests.*{}.*ok'.format(nbcelltests.__version__),ext,re.IGNORECASE); res1=re.search('nbcelltests.*enabled', ext); sys.exit(not (res0 and res1))"
 
 about:
   home: http://github.com/jpmorganchase/nbcelltests
