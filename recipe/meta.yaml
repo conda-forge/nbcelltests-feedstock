@@ -1,5 +1,5 @@
 {% set name = "nbcelltests" %}
-{% set version = "0.2.0" %}
+{% set version = "0.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a61e9805ee9870e30967a0cba594b13dc342413dabc8b7bf3ced35dff834827b
+  sha256: ac81f2834569a89e3b920a51db07144da5b10953fa0fee8858346a728e3a498c
 
 build:
   number: 0
@@ -29,6 +29,7 @@ requirements:
     - pytest-cov
     - pytest-html >=1.20.0
     - flake8
+    - parameterized
 
 test:
   requires:
@@ -38,6 +39,7 @@ test:
     - nbcelltests
   commands:
     - python -m pytest --pyargs nbcelltests
+    # See nbcelltests' Makefile for the original source of these
     # verify labextension was installed
     - jupyter labextension check jupyterlab_celltests
     # verify serverextension was installed (apparently can't ask serverextension about individual extensions)
