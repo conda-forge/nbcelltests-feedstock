@@ -1,5 +1,5 @@
 {% set name = "nbcelltests" %}
-{% set version = "0.2.1" %}
+{% set version = "0.2.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ac81f2834569a89e3b920a51db07144da5b10953fa0fee8858346a728e3a498c
+  sha256: 8e2c88db0d4a5091fc7272500f07d2e8e2ad2bb4043b7f01148bc1d964e55cc7
 
 build:
   number: 0
@@ -43,7 +43,8 @@ test:
     # verify labextension was installed
     - jupyter labextension check jupyterlab_celltests
     # verify serverextension was installed (apparently can't ask serverextension about individual extensions)
-    - python -c "import subprocess,re,sys; import nbcelltests;  ext=subprocess.check_output(['jupyter','serverextension','list'],stderr=subprocess.STDOUT).decode(); res0=re.search('.*nbcelltests.*{}.*ok'.format(nbcelltests.__version__),ext,re.IGNORECASE); res1=re.search('nbcelltests.*enabled', ext); sys.exit(not (res0 and res1))"
+    - python -c "import subprocess,re,sys; import nbcelltests;  ext=subprocess.check_output(['jupyter','serverextension','list'],stderr=subprocess.STDOUT).decode(); res0=re.search('.*nbcelltests.*{}.*ok'.format(nbcelltests.__version__),ext,re.IGNORECASE); res1=re.search('nbcelltests.*enabled', ext); sys.exit(not (res0 and
+      res1))"
 
 about:
   home: http://github.com/jpmorganchase/nbcelltests
