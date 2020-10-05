@@ -1,5 +1,5 @@
 {% set name = "nbcelltests" %}
-{% set version = "0.2.1" %}
+{% set version = "0.2.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ac81f2834569a89e3b920a51db07144da5b10953fa0fee8858346a728e3a498c
+  sha256: 4e9b410861a523a298c72779fcf3334d42aa2163e2af1bd4e9d3fcf70585a17f
 
 build:
   number: 0
@@ -20,6 +20,7 @@ requirements:
     - pip
     - jupyter-packaging
     - nodejs
+    - yarn
   run:
     - python >=3.6
     - jupyterlab >=1.0.0
