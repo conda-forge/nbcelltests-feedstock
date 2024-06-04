@@ -27,7 +27,7 @@ requirements:
   run:
     - python >=3.8
     - flake8
-    - jupyter-server
+    - jupyter_server
     - jupyterlab >=3
     - nbconvert
     - nbformat >=4.0.0
