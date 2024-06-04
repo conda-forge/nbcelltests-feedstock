@@ -16,29 +16,36 @@ build:
 
 requirements:
   host:
-    - python >=3.6
+    - python >=3.8
     - pip
+    - hatchling >=1.3.1
+    - hatch-jupyter-builder
+    - jupyterlab >=4,<5
     - jupyter-packaging
     - nodejs
     - yarn
   run:
-    - python >=3.6
-    - jupyterlab >=1.0.0
-    - nbval >=0.9.1
+    - python >=3.8
+    - flake8
+    - jupyter-server
+    - jupyterlab >=3
     - nbconvert
+    - nbformat >=4.0.0
+    - nbval >=0.9.1
+    - notebook
+    - parameterized
     - pytest >=4.4.0
     - pytest-cov
-    - pytest-html >=1.20.0
-    - flake8
-    - parameterized
+    - pytest-html >=4
 
 test:
   requires:
-    - mock
     - beautifulsoup4
+    - pip
   imports:
     - nbcelltests
   commands:
+    - pip check
     - python -m pytest --pyargs nbcelltests
     # See nbcelltests' Makefile for the original source of these
     # verify labextension was installed
@@ -53,9 +60,7 @@ about:
   license_family: Apache
   license_file: LICENSE
   summary: Cell-by-cell tests for Jupyter notebooks
-
-  description: |
-    Cell-by-cell tests for Jupyter notebooks
+  description: Cell-by-cell tests for Jupyter notebooks
   dev_url: https://github.com/jpmorganchase/nbcelltests
 
 extra:
