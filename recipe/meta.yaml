@@ -49,9 +49,9 @@ test:
     # See nbcelltests' Makefile for the original source of these
     # verify labextension was installed
     - jupyter labextension list 2>&1  | grep nbcelltests | grep enabled
-    # verify serverextension was installed (apparently can't ask serverextension about individual extensions)
-    - python -c "import subprocess,re,sys; import nbcelltests;  ext=subprocess.check_output(['jupyter','serverextension','list'],stderr=subprocess.STDOUT).decode(); res0=re.search('.*nbcelltests.*{}.*ok'.format(nbcelltests.__version__),ext,re.IGNORECASE); res1=re.search('nbcelltests.*enabled', ext); sys.exit(not (res0 and
-      res1))"
+    # verify serverextension was installed
+    - jupyter serverextension enable nbcelltests
+    - jupyter serverextension list 2>&1 | grep nbcelltests | grep OK
 
 about:
   home: http://github.com/jpmorganchase/nbcelltests
