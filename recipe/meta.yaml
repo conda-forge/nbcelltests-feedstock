@@ -50,8 +50,8 @@ test:
     # verify labextension was installed
     - jupyter labextension list 2>&1  | grep nbcelltests | grep enabled
     # verify serverextension was installed
-    - jupyter serverextension enable nbcelltests
-    - jupyter serverextension list 2>&1 | grep nbcelltests | grep OK
+    - jupyter server extension enable nbcelltests
+    - jupyter server extension list 2>&1 | grep nbcelltests | grep OK
 
 about:
   home: http://github.com/jpmorganchase/nbcelltests
