@@ -6,17 +6,17 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: b923738cbf80f9e91d43703f72772b1f6512823fe8b7de9339ffa233efdd387c
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
     - hatchling >=1.3.1
     - hatch-jupyter-builder
@@ -24,7 +24,7 @@ requirements:
     - nodejs
     - yarn
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - flake8
     - jupyter_server
     - jupyterlab >=3
@@ -41,6 +41,7 @@ test:
   requires:
     - beautifulsoup4
     - pip
+    - python {{ python_min }}
   imports:
     - nbcelltests
   commands:
